@@ -1,1 +1,15 @@
-%strong= 'VIDEOS'
+.container
+  %ul.thumbnails
+    - @feeds.each do |feed|
+      %h3= feed[:channel_name]
+      - feed[:entries].each do |entry|
+        %li.span2
+          .thumbnail
+            %a{ href: entry[:player], target: '_blank'}
+              %img{ src: entry[:image], width: '240', alt: '' }
+            .caption
+              .small.text-right
+                = entry[:published]
+              %a.video-title{ href: entry[:player], target: '_blank'}
+                %h4= entry[:title]
+              %p= entry[:content]
