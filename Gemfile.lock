@@ -54,6 +54,8 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.0.2)
+    fancybox2-rails (0.2.5)
+      railties (>= 3.1.0)
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -179,6 +181,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   erb2haml
   execjs
+  fancybox2-rails (~> 0.2.4)
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
