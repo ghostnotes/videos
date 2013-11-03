@@ -1,7 +1,7 @@
 .container
-  %ul.thumbnails
-    - @feeds.each do |feed|
-      %h3= feed[:channel_name]
+  - @feeds.each do |feed|
+    %h3= feed[:channel_name]
+    %ul.thumbnails
       - feed[:entries].each do |entry|
         %li.span2
           .thumbnail

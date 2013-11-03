@@ -9,9 +9,11 @@ DEFAULT_MAX_VIDEO_SIZE = 6
 class VideosController < ApplicationController
   def index
     feed_channels = Array[
+      'xdadevelopers',
+      'jon4lakers',
+      'SoldierKnowsBest',
       'revision3',
       'TheTechFeed',
-      'xdadevelopers',
       'engadget',
       'marquesbrownlee',
       'takaponjp',
