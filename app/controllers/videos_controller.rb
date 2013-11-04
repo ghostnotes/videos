@@ -17,6 +17,7 @@ class VideosController < ApplicationController
       'engadget',
       'marquesbrownlee',
       'takaponjp',
+      'cyoshida1231',
       'phonedog',
       'Rev3Games',
     ]
