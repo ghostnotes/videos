@@ -33,6 +33,7 @@ class VideosController < ApplicationController
 
       feed = {}
       feed[:channel_name] = author.children.search('name').text
+      feed[:channel_url] = "http://www.youtube.com/user/#{channel}"
 
       entries = []
       feed_doc.search('entry').each_with_index do |entry, i|
@@ -48,9 +49,9 @@ class VideosController < ApplicationController
         entry = {
             published: get_formatted_time(published.text),
             title: substring(media_title.text, DEFAULT_MAX_TITLE_LENGTH),
-            image: media_thumbnails.first.attribute('url'),
+            image: media_thumbnails.first.attribute('url').to_s,
             content: substring(content.text, DEFAULT_MAX_CONTENT_LENGTH),
-            player: media_player.attribute('url'),
+            player: media_player.attribute('url').to_s,
         }
 
         entries << entry

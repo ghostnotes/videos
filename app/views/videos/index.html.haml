@@ -1,15 +1,13 @@
 .container
   - @feeds.each do |feed|
-    %h3= feed[:channel_name]
+    = link_to content_tag(:h3, feed[:channel_name]), feed[:channel_url], class: 'title-base', target: '_blank'
     %ul.thumbnails
       - feed[:entries].each do |entry|
         %li.span2
           .thumbnail
-            %a.fancybox-media{ href: entry[:player], target: '_blank'}
-              %img{ src: entry[:image], width: '240', alt: '' }
+            = link_to image_tag(entry[:image], width: 240), entry[:player], class: 'fancybox-media'
             .caption
               .small.text-right
                 = entry[:published]
-              %a.video-title.fancybox-media{ href: entry[:player], target: '_blank'}
-                %h4= entry[:title]
+              = link_to content_tag(:h4, entry[:title]), entry[:player], class: 'fancybox-media title-base'
               %p= entry[:content]
