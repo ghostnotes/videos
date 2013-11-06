@@ -14,12 +14,13 @@ class VideosController < ApplicationController
       'SoldierKnowsBest',
       'revision3',
       'TheTechFeed',
+      'geekbeattv',
       'engadget',
       'marquesbrownlee',
-      'takaponjp',
-      'cyoshida1231',
       'phonedog',
       'Rev3Games',
+      'takaponjp',
+      'cyoshida1231',
     ]
 
     @feeds = []
