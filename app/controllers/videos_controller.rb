@@ -3,7 +3,7 @@ require 'json'
 require 'nokogiri'
 
 DEFAULT_MAX_TITLE_LENGTH = 30
-DEFAULT_MAX_CONTENT_LENGTH = 60
+DEFAULT_MAX_CONTENT_LENGTH = 120
 DEFAULT_MAX_VIDEO_SIZE = 6
 
 class VideosController < ApplicationController
