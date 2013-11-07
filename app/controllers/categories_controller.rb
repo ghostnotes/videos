@@ -6,22 +6,50 @@ DEFAULT_MAX_TITLE_LENGTH = 30
 DEFAULT_MAX_CONTENT_LENGTH = 120
 DEFAULT_MAX_VIDEO_SIZE = 6
 
-class VideosController < ApplicationController
-  def index
-    feed_channels = Array[
-      'xdadevelopers',
-      'jon4lakers',
-      'SoldierKnowsBest',
-      'revision3',
-      'TheTechFeed',
-      'geekbeattv',
-      'engadget',
-      'marquesbrownlee',
-      'phonedog',
-      'Rev3Games',
-      'takaponjp',
-      'cyoshida1231',
-    ]
+TECHNOLOGY_CHANNELS = Array[
+  'xdadevelopers',
+  'jon4lakers',
+  'SoldierKnowsBest',
+  'revision3',
+  'TheTechFeed',
+  'geekbeattv',
+  'engadget',
+  'marquesbrownlee',
+  'phonedog',
+  'Rev3Games',
+]
+
+ENGLISH_CHANNELS = Array[
+  'cyoshida1231',
+]
+
+BUSINESS_CHANNELS = Array[
+  'takaponjp',
+]
+
+class CategoriesController < ApplicationController
+  CHANNELS = {
+    Category::TECHNOLOGY => TECHNOLOGY_CHANNELS,
+    Category::ENGLISH =>  ENGLISH_CHANNELS,
+    Category::BUSINESS => BUSINESS_CHANNELS,
+  }
+
+  def show
+    categories = Category.all
+
+    if request.path == '/'
+      @category = Category::TECHNOLOGY
+    else
+      @category = params[:id]
+    end
+
+    unless categories.include?(@category)
+      render file: 'public/404.html'
+      return
+    end
+
+    feed_channels = CHANNELS[@category]
+puts feed_channels.to_json
 
     @feeds = []
 

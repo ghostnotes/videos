@@ -1,0 +1,33 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      .brand
+        = "Videos [ #{@category} ]"
+      %ul.nav
+        %li.dropdown
+          = get_category_dropdown_tag
+          %ul.dropdown-menu
+            %li
+              = link_to 'Technology', '/categories/Technology'
+            %li
+              = link_to 'Business', '/categories/Business'
+            %li
+              = link_to 'English', '/categories/English'
+
+%br
+%br
+
+.container
+  - @feeds.each do |feed|
+    = link_to content_tag(:h3, feed[:channel_name]), feed[:channel_url], class: 'title-base', target: '_blank'
+    %ul.thumbnails
+      - feed[:entries].each do |entry|
+        %li.span2
+          .thumbnail.text-center
+            = link_to image_tag(entry[:image], width: 240), entry[:player], class: 'fancybox-media'
+            .caption
+              .small.text-right
+                = entry[:published]
+              .text-left
+                = link_to content_tag(:h4, entry[:title]), entry[:player], class: 'fancybox-media title-base'
+                %p= entry[:content]
