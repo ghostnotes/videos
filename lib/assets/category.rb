@@ -6,5 +6,4 @@ module Category
   def self.all
     self.constants.map{ |name| self.const_get(name) }
   end
-
 end

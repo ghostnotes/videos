@@ -2,6 +2,8 @@ require 'open-uri'
 require 'json'
 require 'nokogiri'
 
+#require 'category'
+
 DEFAULT_MAX_TITLE_LENGTH = 30
 DEFAULT_MAX_CONTENT_LENGTH = 120
 DEFAULT_MAX_VIDEO_SIZE = 6
@@ -29,16 +31,21 @@ BUSINESS_CHANNELS = Array[
 
 class CategoriesController < ApplicationController
   CHANNELS = {
-    Category::TECHNOLOGY => TECHNOLOGY_CHANNELS,
-    Category::ENGLISH =>  ENGLISH_CHANNELS,
-    Category::BUSINESS => BUSINESS_CHANNELS,
+#    Category::TECHNOLOGY => TECHNOLOGY_CHANNELS,
+#    Category::ENGLISH =>  ENGLISH_CHANNELS,
+#    Category::BUSINESS => BUSINESS_CHANNELS,
+    'Technology' => TECHNOLOGY_CHANNELS,
+    'English' =>  ENGLISH_CHANNELS,
+    'Business' => BUSINESS_CHANNELS,
   }
 
   def show
-    categories = Category.all
+#    categories = Category.all
+    categories = CHANNELS.keys
 
     if request.path == '/'
-      @category = Category::TECHNOLOGY
+#      @category = Category::TECHNOLOGY
+      @category = 'Technology'
     else
       @category = params[:id]
     end
@@ -49,7 +56,6 @@ class CategoriesController < ApplicationController
     end
 
     feed_channels = CHANNELS[@category]
-puts feed_channels.to_json
 
     @feeds = []
 
