@@ -9,3 +9,14 @@ $(document).ready ->
       media : {}
     }
   })
+
+NProgress.configure(
+  { speed: 350 }
+)
+
+$(document).ready ->
+  NProgress.start();
+
+$(window).load ->
+  NProgress.done();
+

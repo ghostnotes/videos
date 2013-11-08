@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require fancybox
+ *= require nprogress/nprogress
  *= require_tree .
  */

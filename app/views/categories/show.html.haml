@@ -1,4 +1,4 @@
-.navbar.navbar-inverse.navbar-fixed-top
+.navbar
   .navbar-inner
     .container
       .brand
@@ -13,9 +13,6 @@
               = link_to 'Business', '/categories/Business'
             %li
               = link_to 'English', '/categories/English'
-
-%br
-%br
 
 .container
   - @feeds.each do |feed|
