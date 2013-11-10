@@ -2,6 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
+  $('.filter').hide()
+  NProgress.start()
+
   $('.fancybox-media').fancybox({
     openEffect  : 'none',
     closeEffect : 'none',
@@ -14,9 +17,10 @@ NProgress.configure(
   { speed: 350 }
 )
 
-$(document).ready ->
-  NProgress.start();
-
 $(window).load ->
-  NProgress.done();
+  NProgress.done()
 
+  $('.category-link').each ->
+    $(this).bind 'click', (event) =>
+      $('.filter').show()
+      location.href = '/categories/' + this.innerText

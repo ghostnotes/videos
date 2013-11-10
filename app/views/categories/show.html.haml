@@ -1,3 +1,4 @@
+.filter
 .navbar.navbar-inverse
   .navbar-inner
     .container
@@ -8,11 +9,11 @@
           = get_category_dropdown_tag
           %ul.dropdown-menu
             %li
-              = link_to 'Technology', '/categories/Technology'
+              = link_to 'Technology', '', class: 'category-link'
             %li
-              = link_to 'Business', '/categories/Business'
+              = link_to 'Business', '', class: 'category-link'
             %li
-              = link_to 'English', '/categories/English'
+              = link_to 'English', '', class: 'category-link'
 
 .container
   - @feeds.each do |feed|
@@ -28,3 +29,4 @@
               .text-left
                 = link_to content_tag(:h4, entry[:title]), entry[:player], class: 'fancybox-media title-base'
                 %p= entry[:content]
+
