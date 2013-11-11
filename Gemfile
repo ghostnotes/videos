@@ -33,8 +33,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
-
 group :test do
   gem 'rspec-rails'
 end
@@ -53,6 +51,9 @@ end
 gem 'nokogiri'
 
 gem 'fancybox2-rails', '~> 0.2.4'
+
+gem 'foreigner'
+gem 'mysql2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

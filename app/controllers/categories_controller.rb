@@ -40,22 +40,20 @@ class CategoriesController < ApplicationController
   }
 
   def show
-#    categories = Category.all
-    categories = CHANNELS.keys
+    @categories = Category.find(:all)
 
     if request.path == '/'
-#      @category = Category::TECHNOLOGY
-      @category = 'Technology'
+      @current_category = @categories.first
     else
-      @category = params[:id]
+      @current_category = find_category(params[:id], @categories)
     end
 
-    unless categories.include?(@category)
+    if @current_category.nil?
       render file: 'public/404.html'
       return
     end
 
-    feed_channels = CHANNELS[@category]
+    feed_channels = CHANNELS[@current_category.name]
 
     @feeds = []
 
@@ -98,6 +96,26 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def find_category(category_name, categories)
+    categories.each do |category|
+      if category_name == category.name
+        return category
+      end
+    end
+
+    nil
+  end
+
+  def exists_category(category_name, categories)
+    categories.each do |category|
+      if category_name == category.name
+        return true
+      end
+    end
+
+    return false
+  end
 
   def substring(text, max_length)
     if text.length > max_length
