@@ -7,46 +7,19 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # coding: utf-8
 
-TECHNOLOGY_CHANNELS = Array[
-  'xdadevelopers',
-  'jon4lakers',
-  'SoldierKnowsBest',
-  'revision3',
-  'TheTechFeed',
-  'geekbeattv',
-  'engadget',
-  'marquesbrownlee',
-  'phonedog',
-  'Rev3Games',
-]
-
-ENGLISH_CHANNELS = Array[
-  'cyoshida1231',
-]
-
-BUSINESS_CHANNELS = Array[
-  'takaponjp',
-]
-
-CATEGORY_CHANNELS = {
-  Technology: TECHNOLOGY_CHANNELS,
-  Business: BUSINESS_CHANNELS,
-  English: ENGLISH_CHANNELS,
-}
-
 # delete all data in the database.
-Category.delete_all
 Channel.delete_all
+Category.delete_all
 
 # create Categories.
-CATEGORY_CHANNELS.keys.each do |category|
-  Category.create(name: category)
+Videos::Category.all.each do |category_name|
+  Category.create(name: category_name)
 end
 
 # create Channels.
-CATEGORY_CHANNELS.keys.each do |category_name|
-  category = Category.find(:first, conditions: { name: category_name })
-  channels = CATEGORY_CHANNELS[category_name]
+Videos::Category.all.each do |category_name|
+  category = Category.first(conditions: { name: category_name })
+  channels = VideoSharingServices::Youtube::CHANNELS[category_name]
 
   channels.each do |username|
     Channel.create(

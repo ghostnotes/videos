@@ -1,46 +1,16 @@
 require 'open-uri'
 require 'json'
 require 'nokogiri'
-
-#require 'category'
+require "#{Rails.root}/lib/assets/videos_module"
+require "#{Rails.root}/lib/assets/video_sharing_services_module"
 
 DEFAULT_MAX_TITLE_LENGTH = 30
 DEFAULT_MAX_CONTENT_LENGTH = 120
 DEFAULT_MAX_VIDEO_SIZE = 6
 
-TECHNOLOGY_CHANNELS = Array[
-  'xdadevelopers',
-  'jon4lakers',
-  'SoldierKnowsBest',
-  'revision3',
-  'TheTechFeed',
-  'geekbeattv',
-  'engadget',
-  'marquesbrownlee',
-  'phonedog',
-  'Rev3Games',
-]
-
-ENGLISH_CHANNELS = Array[
-  'cyoshida1231',
-]
-
-BUSINESS_CHANNELS = Array[
-  'takaponjp',
-]
-
 class CategoriesController < ApplicationController
-  CHANNELS = {
-#    Category::TECHNOLOGY => TECHNOLOGY_CHANNELS,
-#    Category::ENGLISH =>  ENGLISH_CHANNELS,
-#    Category::BUSINESS => BUSINESS_CHANNELS,
-    'Technology' => TECHNOLOGY_CHANNELS,
-    'English' =>  ENGLISH_CHANNELS,
-    'Business' => BUSINESS_CHANNELS,
-  }
-
   def show
-    @categories = Category.find(:all)
+    @categories = Category.all
 
     if request.path == '/'
       @current_category = @categories.first
@@ -53,7 +23,7 @@ class CategoriesController < ApplicationController
       return
     end
 
-    feed_channels = CHANNELS[@current_category.name]
+    feed_channels = VideoSharingServices::Youtube::CHANNELS[@current_category.name]
 
     @feeds = []
 
