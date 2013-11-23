@@ -12,10 +12,12 @@ class CategoriesController < ApplicationController
   def show
     @categories = Category.all
 
+    @current_category = nil
     if request.path == '/'
       @current_category = @categories.first
     else
-      @current_category = find_category(params[:id], @categories)
+      requested_category_name = params[:id]
+      @current_category = Category.where(name: requested_category_name).first
     end
 
     if @current_category.nil?
@@ -23,12 +25,12 @@ class CategoriesController < ApplicationController
       return
     end
 
-    feed_channels = VideoSharingServices::Youtube::CHANNELS[@current_category.name]
+    feed_channels = Channel.where(category_id: @current_category.id)
 
     @feeds = []
 
     feed_channels.each do |channel|
-      uri = URI("http://gdata.youtube.com/feeds/api/users/#{channel}/uploads")
+      uri = URI(channel.feed_url)
       xml = Nokogiri::XML(uri.read)
       feed_doc = xml.root()
 
@@ -36,7 +38,7 @@ class CategoriesController < ApplicationController
 
       feed = {}
       feed[:channel_name] = author.children.search('name').text
-      feed[:channel_url] = "http://www.youtube.com/user/#{channel}"
+      feed[:channel_url] = channel.url
 
       entries = []
       feed_doc.search('entry').each_with_index do |entry, i|
@@ -66,26 +68,6 @@ class CategoriesController < ApplicationController
   end
 
   private
-
-  def find_category(category_name, categories)
-    categories.each do |category|
-      if category_name == category.name
-        return category
-      end
-    end
-
-    nil
-  end
-
-  def exists_category(category_name, categories)
-    categories.each do |category|
-      if category_name == category.name
-        return true
-      end
-    end
-
-    return false
-  end
 
   def substring(text, max_length)
     if text.length > max_length

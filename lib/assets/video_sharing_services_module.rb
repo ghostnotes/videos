@@ -1,17 +1,16 @@
 module VideoSharingServices
   class Youtube
-
     @@technology_channels = Array[
-        'xdadevelopers',
-        'jon4lakers',
-        'SoldierKnowsBest',
-        'revision3',
-        'TheTechFeed',
-        'geekbeattv',
-        'engadget',
-        'marquesbrownlee',
-        'phonedog',
-        'Rev3Games',
+      'xdadevelopers',
+      'jon4lakers',
+      'SoldierKnowsBest',
+      'revision3',
+      'TheTechFeed',
+      'geekbeattv',
+      'engadget',
+      'marquesbrownlee',
+      'phonedog',
+      'Rev3Games',
     ]
 
     @@english_channels = Array[
@@ -34,10 +33,6 @@ module VideoSharingServices
       Videos::Category::BUSINESS => @@business_channels,
       Videos::Category::THREE_DIMENSIONS => @@three_dimensions_channels,
     }
-
-    def self.to_string
-      puts CHANNELS.to_json
-    end
   end
 
   class Vimeo
