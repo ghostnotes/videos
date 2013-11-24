@@ -1,7 +1,6 @@
 require 'open-uri'
 require 'json'
 require 'nokogiri'
-require "#{Rails.root}/lib/assets/videos_module"
 require "#{Rails.root}/lib/assets/video_sharing_services_module"
 
 DEFAULT_MAX_TITLE_LENGTH = 30

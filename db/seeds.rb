@@ -6,22 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # coding: utf-8
+require 'csv'
 
 # delete all data in the database.
 Channel.delete_all
 Category.delete_all
 
 # create Categories.
-Videos::Category.all.each do |category_name|
-  Category.create(name: category_name)
+CSV.foreach('db/categories.csv') do |row|
+  Category.create(name: row[0])
 end
 
-# create Channels.
-Videos::Category.all.each do |category_name|
-  category = Category.first(conditions: { name: category_name })
-  channels = VideoSharingServices::Youtube::CHANNELS[category_name]
+categories = Category.all
 
-  channels.each do |username|
+categories.each do |category|
+  CSV.foreach("db/channels_#{category.name}.csv") do |row|
+    username = row[0]
     Channel.create(
       category_id: category.id,
       username: username,

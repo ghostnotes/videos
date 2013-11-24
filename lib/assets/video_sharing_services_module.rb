@@ -25,14 +25,18 @@ module VideoSharingServices
       'KanabanGraphics',
       'modo3d',
       'OfficialLightWave3D',
+      '3dsMaxHowTos',
     ]
 
     CHANNELS = {
-      Videos::Category::TECHNOLOGY => @@technology_channels,
-      Videos::Category::ENGLISH => @@english_channels,
-      Videos::Category::BUSINESS => @@business_channels,
-      Videos::Category::THREE_DIMENSIONS => @@three_dimensions_channels,
+        'Technology' => @@technology_channels,
+        'English' => @@english_channels,
+        'Business' => @@business_channels,
+        'ThreeDimensions' => @@three_dimensions_channels,
     }
+
+    def self.get_feed_entries
+    end
   end
 
   class Vimeo
