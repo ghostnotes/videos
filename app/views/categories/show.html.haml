@@ -20,11 +20,11 @@
       - feed[:entries].each do |entry|
         %li.span2
           .thumbnail.text-center
-            = link_to image_tag(entry[:image], width: 240), entry[:player], class: 'fancybox-media'
+            = link_to image_tag(entry[:thumbnail_url], width: 240), entry[:url], class: 'fancybox-media'
             .caption
               .small.text-right
                 = entry[:published]
               .text-left
                 = link_to content_tag(:h4, entry[:title]), entry[:player], class: 'fancybox-media title-base'
-                %p= entry[:content]
+                %p= entry[:description]
 

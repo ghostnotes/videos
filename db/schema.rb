@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111063134) do
+ActiveRecord::Schema.define(version: 20131124080022) do
 
   create_table "categories", force: true do |t|
     t.string   "name",       null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131111063134) do
     t.string   "feed_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "channels", ["category_id"], name: "index_channels_on_category_id", using: :btree
