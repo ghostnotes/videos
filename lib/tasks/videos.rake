@@ -9,6 +9,7 @@ namespace :videos do
       feeds = VideoSharingServices::Youtube.get_feeds(category.id)
       feeds.each do |feed|
         channel = Channel.find(feed[:channel_id])
+        channel.touch
         channel.update(name: feed[:channel_name])
 
         entries = feed[:entries]
