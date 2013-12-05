@@ -9,6 +9,7 @@
 require 'csv'
 
 # delete all data in the database.
+Video.delete_all
 Channel.delete_all
 Category.delete_all
 

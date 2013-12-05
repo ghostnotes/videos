@@ -33,8 +33,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :test do
+group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 gem 'haml-rails'
