@@ -8,6 +8,8 @@
 # coding: utf-8
 require 'csv'
 
+puts 'Started seeding ...'
+
 # delete all data in the database.
 Video.delete_all
 Channel.delete_all
@@ -31,3 +33,5 @@ categories.each do |category|
     )
   end
 end
+
+puts 'Finished.'

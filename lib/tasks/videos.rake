@@ -2,6 +2,7 @@ require "#{Rails.root}/lib/assets/video_sharing_services_module"
 
 namespace :videos do
   task get_feeds: :environment do
+    puts 'Started getting feeds ...'
     Video.delete_all
 
     categories = Category.all
@@ -25,5 +26,7 @@ namespace :videos do
         end
       end
     end
+
+    puts 'Finished.'
   end
 end
