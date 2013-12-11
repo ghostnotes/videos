@@ -7,8 +7,10 @@ namespace :videos do
 
     categories = Category.all
     categories.each do |category|
+      puts "  requesting to category [ #{category.name} ] ..."
       feeds = VideoSharingServices::Youtube.get_feeds(category.id)
       feeds.each do |feed|
+        puts "    processing the channel \"#{feed[:channel_name]}\" ..."
         channel = Channel.find(feed[:channel_id])
         channel.touch
         channel.update(name: feed[:channel_name])
